@@ -1,7 +1,7 @@
 class ParticipationsController < ApplicationController
   before_action :set_current_player
 
-  def confirm
+  def create
     @game = Game.find(params[:game_id])
     @participation = Participation.find_by(player: @player, game: @game)
     # Rails.logger.debug "********* #{@game.participated?(@player)} *********"

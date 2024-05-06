@@ -1,11 +1,10 @@
 <h1>Upcoming Games</h1>
 <% @games.each do |game| %>
-  <%= form_with(url: confirm_game_path, method: :post, local: true) do |form| %>
+  <%= form_with(url: confirm_game_path, method: :post, local: true, remote: true) do |form| %>
     <%= hidden_field_tag :game_id, game.id %>
     <%= hidden_field_tag :token, params[:token] %>
     <%= submit_tag game.date.strftime("%A"), class: "confirm-button",
-      data: { player: @player || 'No player found', game: game.date.strftime("%Y-%m-%d") || 'No game found'},
-      onclick: 'confirmDay(event)' %>
+      data: { player: @player.token || 'No player found', game_id: game.id || 'No game found'} %>
   <% end %>
 <% end %>
 
@@ -13,17 +12,44 @@
   <div class="<%= key %>"><%= value %></div>
 <% end %>
 
-<script>
-  function confirmDay(event) {
-    const button = event.currentTarget;
-    const playerInfo = button.dataset.player;
-    const gameDate = button.dataset.game;
-    button.classList.toggle('confirmed')
 
-    if (button.classList.contains('confirmed')) {
-      console.log('confirmed the date')
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const buttons = document.querySelectorAll('.confirm-button');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the form submission
+
+      const gameId = this.dataset.gameId;
+      const playerToken = this.dataset.player;
+
+      fetch(`/games/${gameId}/participations?token=${playerToken}`, {
+        method: 'POST', // Assume every click toggles participation status
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ player_id: playerToken })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.message); // Log the server response message
+        updateButtonColor(button, data.message);
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  });
+
+  function updateButtonColor(button, message) {
+    if (message.includes("added")) {
+      button.style.backgroundColor = 'blue';
     } else {
-      console.log('unbooked')
+      button.style.backgroundColor = 'pink';
     }
   }
+});
+
 </script>
