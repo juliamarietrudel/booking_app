@@ -1,0 +1,29 @@
+<h1>Upcoming Games</h1>
+<% @games.each do |game| %>
+  <%= form_with(url: confirm_game_path, method: :post, local: true) do |form| %>
+    <%= hidden_field_tag :game_id, game.id %>
+    <%= hidden_field_tag :token, params[:token] %>
+    <%= submit_tag game.date.strftime("%A"), class: "confirm-button",
+      data: { player: @player || 'No player found', game: game.date.strftime("%Y-%m-%d") || 'No game found'},
+      onclick: 'confirmDay(event)' %>
+  <% end %>
+<% end %>
+
+<% flash.each do |key, value| %>
+  <div class="<%= key %>"><%= value %></div>
+<% end %>
+
+<script>
+  function confirmDay(event) {
+    const button = event.currentTarget;
+    const playerInfo = button.dataset.player;
+    const gameDate = button.dataset.game;
+    button.classList.toggle('confirmed')
+
+    if (button.classList.contains('confirmed')) {
+      console.log('confirmed the date')
+    } else {
+      console.log('unbooked')
+    }
+  }
+</script>
