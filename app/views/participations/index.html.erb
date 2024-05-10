@@ -1,0 +1,37 @@
+<h1>All participations</h1>
+
+<ul>
+  <% @participations.each do |participation| %>
+    <li><strong>Date:</strong> <%= participation.game.date %> <br>
+    <strong>Player:</strong> <%= participation.player.name %></li>
+  <% end %>
+</ul>
+
+<ul>
+  <% @games.each do |game| %>
+    <li><%= game.date.strftime("%a, %d %b %Y") %>
+    <% participations = game.participations %>
+    <ul>
+      <% participations.each do |participation| %>
+        <li><%= participation.player.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>
+
+<table>
+  <thead>
+    <th>Game Date</th>
+    <th>Player Name</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+        <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

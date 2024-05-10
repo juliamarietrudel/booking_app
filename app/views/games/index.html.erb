@@ -1,22 +1,75 @@
 <h1>Upcoming Games</h1>
 <% @games.each do |game| %>
-  <%= form_with(url: confirm_game_path, method: :post, local: true, remote: true) do |form| %>
-    <%= hidden_field_tag :game_id, game.id %>
-    <%= hidden_field_tag :token, params[:token] %>
+  <%= form_with(url: create_or_destroy_participation_path(token: @player.token, game_id: game.id), method: :post, local: true, remote: true) do |form| %>
     <%= submit_tag game.date.strftime("%A"), class: "confirm-button",
-      data: { player: @player.token || 'No player found', game_id: game.id || 'No game found'} %>
+      data: { player_token: @player.token || 'No player found', game_id: game.id || 'No game found'} %>
   <% end %>
 <% end %>
 
-<% flash.each do |key, value| %>
-  <div class="<%= key %>"><%= value %></div>
-<% end %>
+
+
+
+
 
 
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+  const buttons = document.querySelectorAll('.confirm-button');
+
+  // load page with appropriate button colors
+  document.addEventListener('DOMContentLoaded', (event) => {
+    console.log('content loaded');
+    // select buttons
+
+    buttons.forEach((button) => {
+      playerToken = button.dataset.playerToken;
+      gameId = button.dataset.gameId;
+      fetch(`/players/${playerToken}/games/${gameId}/participation_exists`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.exists);
+        if (data.exists) {
+          button.style.backgroundColor = 'green';
+        } else {
+          button.style.backgroundColor = 'white';
+        }
+      })
+    })
+  });
+
+  // change button colors when click
+  buttons.forEach((button) => {
+    playerToken = button.dataset.playerToken;
+    gameId = button.dataset.gameId;
+
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      fetch(`/players/${playerToken}/games/${gameId}/participation_exists`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.exists) {
+          console.log(data.exists);
+          button.style.backgroundColor = 'green';
+          button.form.submit(); // This manually submits the form
+        } else {
+          console.log(data.exists);
+          button.style.backgroundColor = 'white';
+          button.form.submit(); // This manually submits the form
+        }
+      })
+    })
+  })
+
+</script>
+
+
+
+
+
+
+
+<%# document.addEventListener('DOMContentLoaded', function() {
   const buttons = document.querySelectorAll('.confirm-button');
 
   buttons.forEach(button => {
@@ -25,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const gameId = this.dataset.gameId;
       const playerToken = this.dataset.player;
-
+      console.log('clicked')
       fetch(`/games/${gameId}/participations?token=${playerToken}`, {
         method: 'POST', // Assume every click toggles participation status
         headers: {
@@ -39,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(data.message); // Log the server response message
         updateButtonColor(button, data.message);
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => console.error(error));
     });
   });
 
@@ -50,6 +103,4 @@ document.addEventListener('DOMContentLoaded', function() {
       button.style.backgroundColor = 'pink';
     }
   }
-});
-
-</script>
+}); %>

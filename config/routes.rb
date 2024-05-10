@@ -1,16 +1,53 @@
 Rails.application.routes.draw do
-  root 'players#show'
+  # display games
+  get 'players/:token/games', to: 'games#index', as: 'player_games'
 
-  # choose games
-  # get 'games/players/:token', to: 'players#show', as: 'player_games'
-  # post 'confirm', to: 'participations#confirm', as: 'confirm_game'
+  # create a participation with token and game_id
+  post 'players/:token/games/:game_id/participations', to: 'participations#create_or_destroy', as: 'create_or_destroy_participation'
 
-  # # endpoint to fetch game participation
-  # get 'games/:id/participations', to: 'games#participations', as: 'game_participations'
-  # post '/games/:id/participations', to: 'games#participations'
+  # check if a participation exists
+  get 'players/:token/games/:game_id/participation_exists', to: 'participations#participation_exists', as: 'participation_exists'
 
-    get 'players/:player_token/games', to: 'games#index', as: 'player_games'
-
-    post 'players/:player_token/games/:game_id/participations', to: 'participations#create', as: 'create_participation'
-    delete 'players/:player_token/games/:game_id/participations', to: 'participations#destroy', as: 'destroy_participation'
+  # display all participations
+  get 'participations', to: 'participations#index', as: 'all_participations'
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# choose games
+# get 'games/players/:token', to: 'players#show', as: 'player_games'
+# post 'confirm', to: 'participations#confirm', as: 'confirm_game'
+
+# # endpoint to fetch game participation
+# get 'games/:id/participations', to: 'games#participations', as: 'game_participations'
+# post '/games/:id/participations', to: 'games#participations'
