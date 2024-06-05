@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_06_04_205437) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "games", force: :cascade do |t|
     t.date "date"
     t.datetime "created_at", null: false
@@ -18,8 +21,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_205437) do
   end
 
   create_table "participations", force: :cascade do |t|
-    t.integer "game_id", null: false
-    t.integer "player_id", null: false
+    t.bigint "game_id", null: false
+    t.bigint "player_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_participations_on_game_id"
