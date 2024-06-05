@@ -56,15 +56,15 @@ class GamesController < ApplicationController
     render 'confirmation'
   end
 
-  # def send_participation_invites
-  #   players = Player.all
-  #   games = Game.all
-  #   players.each do |player|
-  #     GamesMailer.participation_invite(player, games).deliver_now
-  #   end
+  def send_participation_invites
+    players = Player.all
+    games = Game.all
+    players.each do |player|
+      GamesMailer.participation_invite(player, games).deliver_now
+    end
 
-  #   redirect_to root_path, notice: 'Participation invites sent to all players.'
-  # end
+    redirect_to root_path, notice: 'Participation invites sent to all players.'
+  end
 
   private
 
