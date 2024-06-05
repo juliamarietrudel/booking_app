@@ -2,7 +2,13 @@ class GamesController < ApplicationController
   before_action :set_current_player
 
   def index
-    @games = Game.all
+    if @player
+      @games = Game.all
+      Rails.logger.info "Fetched games: #{@games.pluck(:id).join(', ')} for player: #{@player.email}"
+    else
+      Rails.logger.info "Player not found with token: #{params[:token]}"
+      render plain: 'Player not found', status: :not_found
+    end
   end
 
   def participations
