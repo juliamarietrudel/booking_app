@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :users
 
   # display button
-  root to: 'main#index'
+  root 'main#index'
 
   # send email to players
   post 'main/send_email', to: 'main#send_email', as: 'send_email_main'

@@ -1,2 +1,2 @@
 <h1>Hi <%= @player.name %>,</h1>
-<p>Click on this <a href="<%= url_for(controller: 'games', action: 'index', token: @player.token, only_path: false) %>">link</a> to confirm the days you want to play</p>
+<p>Click on this <a href="<%= player_games_url(token: @player.token) %>">link</a> to confirm the days you want to play</p>
