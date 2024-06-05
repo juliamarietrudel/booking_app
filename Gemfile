@@ -84,3 +84,6 @@ end
 
 # efficient background processing
 gem 'sidekiq'
+
+# test in production environment
+gem 'dotenv-rails', groups: [:development, :test]

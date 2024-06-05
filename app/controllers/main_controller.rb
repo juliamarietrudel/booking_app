@@ -6,8 +6,9 @@ class MainController < ApplicationController
   end
 
   def send_participation_invites
-    players = Player.all
-    players.each do |player|
+    Rails.logger.info "=== send_participation_invites called ==="
+    Player.find_each do |player|
+      Rails.logger.info "=== Inviting player: #{player.email} ==="
       MainMailer.participation_invite(player).deliver_later
     end
 
