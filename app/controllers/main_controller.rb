@@ -6,9 +6,8 @@ class MainController < ApplicationController
   end
 
   def send_participation_invites
-    players = Player.all
-    players.each do |player|
-      MainMailer.participation_invite(player).deliver_now
+    players.find_each do |player|
+      MainMailer.participation_invite(player).deliver_later
     end
 
     redirect_to root_path, notice: 'Participation invites sent to all players.'

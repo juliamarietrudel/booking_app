@@ -81,3 +81,6 @@ end
 group :production do
   gem 'pg'
 end
+
+# efficient background processing
+gem 'sidekiq'
