@@ -7,7 +7,7 @@ class MainController < ApplicationController
 
   def send_participation_invites
     players = Player.all
-    Rails.logger.info "Fetched #{players.count} players for email invites"
+    Rails.logger.info "Retrieved #{players.count} players for email invites"
 
     players.each do |player|
       Rails.logger.info "=== Inviting player: #{player.email} ==="
