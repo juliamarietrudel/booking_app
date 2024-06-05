@@ -6,8 +6,10 @@ class MainController < ApplicationController
   end
 
   def send_participation_invites
-    Rails.logger.info "Trying to send email to #{@player.email}"
-    Player.find_each do |player|
+    players = Player.all
+    Rails.logger.info "Fetched #{players.count} players for email invites"
+
+    players.each do |player|
       Rails.logger.info "=== Inviting player: #{player.email} ==="
       MainMailer.participation_invite(player).deliver_later
     end
