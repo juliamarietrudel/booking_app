@@ -1,15 +1,25 @@
 <h1>Upcoming Games</h1>
-<% @games.each do |game| %>
-  <%= form_with(url: create_or_destroy_participation_path(token: @player.token, game_id: game.id), method: :post, local: true, remote: true) do |form| %>
-    <%= submit_tag game.date.strftime("%A"), class: "confirm-button",
-      data: { player_token: @player.token || 'No player found', game_id: game.id || 'No game found'} %>
-  <% end %>
-<% end %>
-
-
-
-
-
+<div class="button-container-wrapper">
+  <div class="legende-container">
+    <div class="text-aligned left">
+      <div class="colors color-unconfirmed"></div>
+      <p>Unconfirmed</p>
+    </div>
+    <div class="text-aligned">
+      <div class="colors color-confirmed"></div>
+      <p>confirmed</p>
+    </div>
+  </div>
+  <div class="button-container">
+    <% @games.each do |game| %>
+      <%= form_with(url: create_or_destroy_participation_path(token: @player.token, game_id: game.id), method: :post, local: true) do |form| %>
+        <%= submit_tag game.date.strftime("%A the %dth of %B"), class: "confirm-button",
+          data: { player_token: @player.token || 'No player found', game_id: game.id || 'No game found'} do %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
 
 
@@ -30,9 +40,9 @@
       .then(data => {
         console.log(data.exists);
         if (data.exists) {
-          button.style.backgroundColor = 'green';
+          button.style.backgroundColor = '#023e7f';
         } else {
-          button.style.backgroundColor = 'white';
+          // button.style.backgroundColor = '#007bff';
         }
       })
     })
@@ -50,11 +60,11 @@
       .then(data => {
         if (data.exists) {
           console.log(data.exists);
-          button.style.backgroundColor = 'green';
+          button.style.backgroundColor = '#023e7f';
           button.form.submit(); // This manually submits the form
         } else {
           console.log(data.exists);
-          button.style.backgroundColor = 'white';
+          // button.style.backgroundColor = '#007bff';
           button.form.submit(); // This manually submits the form
         }
       })

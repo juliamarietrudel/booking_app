@@ -4,7 +4,7 @@ class ParticipationsController < ApplicationController
   # called by the form when user clicks on buttons
   def create_or_destroy
     @participation = Participation.find_by(player: @player, game: @game)
-    Rails.logger.debug "********* CLICKED *********"
+    Rails.logger.debug '********* CLICKED *********'
 
     if @participation
       destroy
@@ -49,7 +49,7 @@ class ParticipationsController < ApplicationController
   end
 
   def group_by_date(participations)
-    participations.group_by do |participation, date|
+    participations.group_by do |participation|
       participation.date
     end
   end

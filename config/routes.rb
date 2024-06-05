@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
-  # display games
+  resources :users
+
+  # display button
+  root to: 'main#index'
+
+  # send email to players
+  post 'main/send_email', to: 'main#send_email', as: 'send_email_main'
+
+  # display games for a given player
   get 'players/:token/games', to: 'games#index', as: 'player_games'
 
-  # create a participation with token and game_id
+  # create or destroy a participation with token and game_id
   post 'players/:token/games/:game_id/participations', to: 'participations#create_or_destroy', as: 'create_or_destroy_participation'
 
   # check if a participation exists
@@ -10,44 +18,9 @@ Rails.application.routes.draw do
 
   # display all participations
   get 'participations', to: 'participations#index', as: 'all_participations'
+
+  # display four games in email
+  get '/play', to: 'games#register_participation', as: 'register_game'
+
+  post 'send_participation_invites', to: 'main#send_participation_invites'
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# choose games
-# get 'games/players/:token', to: 'players#show', as: 'player_games'
-# post 'confirm', to: 'participations#confirm', as: 'confirm_game'
-
-# # endpoint to fetch game participation
-# get 'games/:id/participations', to: 'games#participations', as: 'game_participations'
-# post '/games/:id/participations', to: 'games#participations'

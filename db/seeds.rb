@@ -2,22 +2,27 @@ require 'faker'
 
 games = []
 
-games << Game.create(date: Date.parse('15.05.2024'))
-games << Game.create(date: Date.parse('16.05.2024'))
-games << Game.create(date: Date.parse('18.05.2024'))
-games << Game.create(date: Date.parse('19.05.2024'))
+games << Game.create(date: Date.parse('10.06.2024'))
+games << Game.create(date: Date.parse('11.06.2024'))
+games << Game.create(date: Date.parse('12.06.2024'))
+games << Game.create(date: Date.parse('13.06.2024'))
 
 puts 'four games were created'
 
 players = []
 
-10.times do
-  player = Player.create(
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
-    token: SecureRandom.urlsafe_base64
-  )
-  players << player
-end
+player = Player.create(
+  name: 'Julia Trudel',
+  email: 'juliamarietrudel96@gmail.com',
+  token: SecureRandom.urlsafe_base64
+)
+players << player
+
+player = Player.create(
+  name: 'Charles Desjardins',
+  email: 'desjardins.charles.a@gmail.com',
+  token: SecureRandom.urlsafe_base64
+)
+players << player
 
 puts '10 players were created'

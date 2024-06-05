@@ -1,6 +1,6 @@
 <h1>All participations</h1>
 
-<table>
+<table class='table_participations'>
   <thead>
     <th>Game Date</th>
     <th>Player Name</th>
@@ -12,7 +12,13 @@
           <%= game.date.strftime("%a, %d %b %Y") %>
         </td>
         <td>
-          <%= game.participations.map { |p| p.player.name } %>
+        <ul>
+          <% game.participations.map do |p| %>
+            <li>
+              <%= p.player.name %>
+            </li>
+          <% end %>
+        </ul>
         </td>
       </tr>
     <% end %>
