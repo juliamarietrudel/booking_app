@@ -111,7 +111,7 @@ Rails.application.configure do
       authentication: :plain,
       enable_starttls_auto: true
     }
-    config.action_mailer.default_url_options = { host: 'golf-booking-app.herokuapp.com', protocol: 'https' }
+    config.action_mailer.default_url_options = { host: 'golf-booking-app-988410ec4e3c.herokuapp.com', protocol: 'https' }
   end
 
 end
