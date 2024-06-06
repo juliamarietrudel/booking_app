@@ -18,11 +18,4 @@ player = Player.create(
 )
 players << player
 
-# player = Player.create(
-#   name: 'Charles Desjardins',
-#   email: 'desjardins.charles.a@gmail.com',
-#   token: SecureRandom.urlsafe_base64
-# )
-# players << player
-
 puts "#{players.count} players added"
