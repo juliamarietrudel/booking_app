@@ -3,8 +3,12 @@ class GamesController < ApplicationController
 
   def index
     if @player
-      @games = Game.all
-      Rails.logger.info "Fetched games: #{@games.pluck(:id).join(', ')} for player: #{@player.email}"
+      @dates = Game.dates_for_next_week
+      @games = Game.create_games(@dates)
+      Rails.logger.info "***********************#{@games}"
+      # @games.map do |date|
+      #   Game.find_or_create_date(date)
+      # end
     else
       Rails.logger.info "Player not found with token: #{params[:token]}"
       render plain: 'Player not found', status: :not_found

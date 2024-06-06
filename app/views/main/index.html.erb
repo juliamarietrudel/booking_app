@@ -1,4 +1,5 @@
-<h1>Welcome Vincent</h1>
-<p>Today is <%= @day %>, the <%= @date %> of <%= @month %></p>
+<h1>Bonjour Vincent</h1>
+<p class='sous-texte'>Nous sommes le <%= @day %> <%= @date %> <%= @month %></p>
 
-<%= button_to 'Send Participation Invites', send_participation_invites_path, method: :post, class: 'confirm-button' %>
+<%= button_to 'Envoyer les invitations', send_participation_invites_path, method: :post, class: 'confirm-button' %>
+<%= link_to "Vérifier les participations de cette semaine", all_participations_path, class: 'confirm-button' %>

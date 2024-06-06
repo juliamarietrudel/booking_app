@@ -23,8 +23,23 @@ body {
   align-items: center;
   font-size: 15px;
   height: 100%;
+  padding-top: 20px;
 }
 
 h1 {
   margin: 30px 0;
+}
+
+.sous-texte {
+  margin: 0 0 30px 0;
+  color: grey;
+}
+
+i {
+  color: #007bff;
+  font-size: 20px;
+}
+
+.navbar {
+  width: 90%;
 }

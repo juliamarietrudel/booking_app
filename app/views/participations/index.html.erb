@@ -2,8 +2,9 @@
 
 <table class='table_participations'>
   <thead>
-    <th>Game Date</th>
-    <th>Player Name</th>
+    <th id='left'>Dates</th>
+    <th>Noms des joueurs</th>
+    <th id='right'>Équipes</th>
   </thead>
   <tbody>
     <% @games.each do |game| %>
@@ -12,13 +13,16 @@
           <%= game.date.strftime("%a, %d %b %Y") %>
         </td>
         <td>
-        <ul>
-          <% game.participations.map do |p| %>
-            <li>
-              <%= p.player.name %>
-            </li>
-          <% end %>
-        </ul>
+          <ul>
+            <% game.participations.map do |p| %>
+              <li>
+                <%= p.player.name %>
+              </li>
+            <% end %>
+          </ul>
+        </td>
+        <td>
+
         </td>
       </tr>
     <% end %>

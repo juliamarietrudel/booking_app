@@ -1,28 +1,37 @@
-
-/* Applies to all tables with the 'table_participations' class */
 .table_participations {
-  width: 100%; /* Set the width of the table to fill the container */
-  border-collapse: collapse; /* Ensures borders between cells are shared */
-}
-
-.table_participations th, .table_participations td {
-  border: 1px solid black; /* Adds borders around each cell */
-  padding: 8px; /* Adds space around text in each cell */
-  text-align: left; /* Aligns text to the left */
+  border-collapse: separate; /* Needed to apply border-radius */
+  border-spacing: 0; /* Optional: Adjusts spacing for a cleaner look */
+  width: 70%;
+  border: 1px solid #ddd; /* Optional: Adds a border to the table */
+  border-radius: 8px; /* Rounds the corners of the table */
 }
 
 .table_participations th {
-  background-color: #575656; /* Sets a light grey background for headers */
+  background-color: #007bff;
   color: white;
 }
 
-.table_participations tbody tr:nth-child(odd) {
-  background-color: #e9e9e9; /* Optional: Adds a light background to every other row */
-}
-.table_participations li {
-  list-style: none;
+.table_participations th, .table_participations td {
+  border: 1px solid #ddd; /* Adds a border to table cells */
+  padding: 8px; /* Adds padding inside table cells */
 }
 
-.table_participations ul {
-  padding: 0;
+.table_participations #left{
+  border-top-left-radius: 8px; /* Bottom-left corner */
+}
+
+.table_participations #right{
+  border-top-right-radius: 8px; /* Bottom-left corner */
+}
+
+.table_participations #right{
+  border-top-right-radius: 8px; /* Bottom-left corner */
+}
+
+.table_participations tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px; /* Bottom-left corner */
+}
+
+.table_participations tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px; /* Bottom-right corner */
 }
