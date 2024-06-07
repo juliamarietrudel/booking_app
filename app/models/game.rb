@@ -14,7 +14,7 @@ class Game < ApplicationRecord
 
   def self.create_games(dates)
     dates.map do |date|
-      Game.create(date: date)
+      Game.find_or_create_by(date:)
     end
   end
 

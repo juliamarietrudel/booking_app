@@ -12,10 +12,11 @@ puts 'four games were created'
 players = []
 
 player = Player.create(
-  name: 'Julia Trudel',
+  name: 'Julia-Marie Trudel',
   email: 'juliamarietrudel96@gmail.com',
   token: SecureRandom.urlsafe_base64
 )
 players << player
+
 
 puts "#{players.count} players added"

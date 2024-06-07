@@ -11,6 +11,13 @@ test:
   <<: *default
   database: app_golf_test
 
+# production:
+#   <<: *default
+#   url: <%= ENV['DATABASE_URL'] %>
+
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  database: app_golf_production
+  username: julia-marietrudel
+  host: localhost
+  port: 5432
