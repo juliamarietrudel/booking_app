@@ -12,7 +12,8 @@ puts 'four games were created'
 players = []
 
 player = Player.create(
-  name: 'Julia Trudel',
+  first_name: 'Julia',
+  last_name: 'Trudel',
   email: 'juliamarietrudel96@gmail.com',
   token: SecureRandom.urlsafe_base64
 )
