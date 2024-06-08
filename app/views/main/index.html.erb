@@ -1,7 +1,7 @@
 <h1>Bonjour Vincent</h1>
 <p class='sous-texte'>Nous sommes le <%= @day %> <%= @date %> <%= @month %></p>
 
-<%= button_to 'Envoyer les invitations', send_participation_invites_path, method: :post, class: 'confirm-button test', data: { disable_with: 'Sending...' }%>
+<%= button_to 'Envoyer les invitations', send_participation_invites_path, method: :post, class: 'confirm-button test' %>
 <%= link_to "Vérifier les participations de cette semaine", all_participations_path, class: 'confirm-button' %>
 
 <script>
@@ -11,7 +11,7 @@
   // })
 
     document.addEventListener('DOMContentLoaded', (event) => {
-    console.log('page loaded');
+    console.log('page loaded completed');
     // select buttons
     })
 </script>
