@@ -98,7 +98,6 @@ Rails.application.configure do
 
 
   # configure email setting
-  Rails.application.configure do
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
@@ -106,12 +105,11 @@ Rails.application.configure do
       address: 'smtp.gmail.com',
       user_name: ENV['GMAIL_USERNAME'],
       password: ENV['GMAIL_PASSWORD'],
-      domain: 'golfbookingapp.heroku.com',
+      domain: 'gmail.com',
       port: 587,
       authentication: :plain,
       enable_starttls_auto: true
     }
     config.action_mailer.default_url_options = { host: 'golf-booking-app-988410ec4e3c.herokuapp.com', protocol: 'https' }
-  end
 
 end

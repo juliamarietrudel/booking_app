@@ -86,4 +86,4 @@ end
 gem 'sidekiq'
 
 # test in production environment
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: [:development, :production, :test]
