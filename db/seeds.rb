@@ -1,6 +1,6 @@
 require 'faker'
 
-games = []
+# games = []
 
 # games << Game.create(date: Date.parse('10.06.2024'))
 # games << Game.create(date: Date.parse('11.06.2024'))
@@ -13,6 +13,14 @@ players = []
 
 player = Player.create(
   first_name: 'Julia',
+  last_name: 'Trudel',
+  email: 'juliamarietrudel96@gmail.com',
+  token: SecureRandom.urlsafe_base64
+)
+players << player
+
+player = Player.create(
+  first_name: 'Aurelie',
   last_name: 'Trudel',
   email: 'juliamarietrudel96@gmail.com',
   token: SecureRandom.urlsafe_base64
