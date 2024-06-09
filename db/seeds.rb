@@ -20,9 +20,9 @@ player = Player.create(
 players << player
 
 player = Player.create(
-  first_name: 'Aurelie',
-  last_name: 'Trudel',
-  email: 'juliamarietrudel96@gmail.com',
+  first_name: 'Charles',
+  last_name: 'Desjardins',
+  email: 'desjardins.charles.a@gmail.com',
   token: SecureRandom.urlsafe_base64
 )
 players << player

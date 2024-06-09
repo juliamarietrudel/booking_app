@@ -3,6 +3,8 @@ class MainController < ApplicationController
     @day = Date.today.strftime('%A')
     @date = Date.today.strftime('%d')
     @month = Date.today.strftime('%B')
+
+    @player_count = Player.count
   end
 
   def send_participation_invites

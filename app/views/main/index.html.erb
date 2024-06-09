@@ -1,8 +1,15 @@
-<h1>Bonjour Vincent</h1>
-<p class='sous-texte'>Nous sommes le <%= @day %> <%= @date %> <%= @month %></p>
+<div class="main-page-container">
+  <div class="container-titles">
+    <h1>Bonjour Vincent 🏌️</h1>
+    <p class='sous-texte'>Nous sommes le <%= @day %> <%= @date %> <%= @month %></p>
+    <p class="confirmation-message sous-texte">All <%= @player_count %> emails have been successfully sent!</p>
+  </div>
 
-<%= button_to 'Envoyer les invitations', send_participation_invites_path, method: :post, class: 'confirm-button test' %>
-<%= link_to "Vérifier les participations de cette semaine", all_participations_path, class: 'confirm-button' %>
+  <div class="container-btns">
+    <%= button_to 'Envoyer les invitations', send_participation_invites_path, method: :post, class: 'confirm-button test email-button' %>
+    <%= link_to "Vérifier les participations de cette semaine", all_participations_path, class: 'confirm-button' %>
+  </div>
+</div>
 
 <script>
   // const testBtn = document.querySelector('.test');
@@ -11,7 +18,20 @@
   // })
 
     document.addEventListener('DOMContentLoaded', (event) => {
-    console.log('page loaded completed');
-    // select buttons
+      console.log('page loaded completed');
+
+      // select buttons
+      confirmationMessage = document.querySelector('.confirmation-message')
+      emailButton = document.querySelector('.email-button');
+
+      confirmationMessage.classList.add('hidden')
+      // display confirmaiton message when email sent
+      const displayConfirmation = () => {
+        console.log('clicked')
+        confirmationMessage.classList.remove('hidden')
+      }
+    emailButton.addEventListener('click', displayConfirmation)
     })
+
+
 </script>
