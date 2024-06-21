@@ -1,15 +1,16 @@
 <div class="main-container" id="main-container-games">
   <div class="container-titles">
-    <h1>Clickez sur les dates pour lesquelles vous voulez jouer</h1>
-    <h2>Vous avez confimé que vous voulez jouer:
-      <p class="days-confirmed"><%= @player.participations.map { |p| p.game.date.strftime("%A") }.to_sentence(last_word_connector: ' and ', two_words_connector: ' and ') %></p>
-    </h2>
+    <h1>Clickez sur les dates où vous voulez jouer</h1>
+    <div class="confirmation-container hidden">
+      <h2>Vous avez confimé que vous voulez jouer les jours suivants:    </h2>
+      <h2 class="days-confirmed"><%= @player.participations.sort_by { |p| p.game.date }.map { |p| I18n.l(p.game.date, format: '%A') }.to_sentence(last_word_connector: ' et ', two_words_connector: ' et ') %></h2>
+    </div>
   </div>
   <div class="form-container">
     <div class="button-container">
       <% @games.each do |game| %>
         <%= form_with(url: create_or_destroy_participation_path(token: @player.token, game_id: game.id), method: :post, local: true) do |form| %>
-          <%= submit_tag game.date.strftime("%A the %dth of %B"), class: "confirm-button",
+          <%= submit_tag I18n.l(game.date, format: "%A le %d %B"), class: "confirm-button btn-width",
             data: { player_token: @player.token || 'No player found', game_id: game.id || 'No game found'} do %>
           <% end %>
         <% end %>
@@ -17,14 +18,14 @@
     </div>
     <div class="form-center">
       <%= form_with(url: add_comment_path(token: @player.token), method: :post, local: true, html: { class: 'form-justify' }) do |form| %>
-        <%= form.text_field :comment, class: 'input-field' %>
-        <%= form.submit 'Continue', class: 'comment-confirm-button' %>
+        <%= form.text_field :comment, class: 'input-field', placeholder: 'Entrez vos commentaires ici' %>
+        <%= form.submit 'Envoyer', class: 'comment-confirm-button' %>
       <% end %>
     </div>
   </div>
 
   <div class="container-exit">
-    <h2>Cliquez sur le x en dessous quand vous avez terminé</h2>
+    <h2>Cliquez sur le "x" ci-dessous quand vous avez terminé</h2>
     <div id="close-page-button"><i class="fa-solid fa-xmark"></i></div>
   </div>
 </div>
@@ -34,12 +35,19 @@
   const commentConfirmButton = document.querySelector('.comment-confirm-button');
   const buttons = document.querySelectorAll('.confirm-button');
   const closeButton = document.querySelector('#close-page-button');
+  const inputField = document.querySelector('.input-field');
+  const confirmationMessage = document.querySelector('.confirmation-container');
+  const daysConfirmed = document.querySelector('.days-confirmed');
 
+  if (daysConfirmed && daysConfirmed.textContent.trim() !== '') {
+    confirmationMessage.classList.remove('hidden');
+  }
   //  disable comment confirm button
   const disableCommentButton = () => {
     commentConfirmButton.disabled = true;
     commentConfirmButton.setAttribute('id', 'disabled-button')
     commentConfirmButton.value = 'Commentaire Envoyé';
+    inputField.style.display = 'none';
   }
 
   // if (localStorage.getItem('commentButtonClicked')) disableCommentButton();

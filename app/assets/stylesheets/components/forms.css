@@ -1,5 +1,5 @@
 .form-container {
-  width: 100%;
+  width: auto;
 }
 
 .form-center {
@@ -10,12 +10,16 @@
 .form-justify {
   display: flex;
   width: 100%;
+  justify-content: center;
 }
 
 .input-field {
   padding: 10px;
-  margin: 10px 10px 10px 0;
   border-radius: 5px;
   border: 1px solid black;
   flex-grow: 1;
+}
+
+.input-field::placeholder {
+  font-size: 14px;
 }

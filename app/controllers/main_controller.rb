@@ -1,8 +1,8 @@
 class MainController < ApplicationController
   def index
-    @day = Date.today.strftime('%A')
-    @date = Date.today.strftime('%d')
-    @month = Date.today.strftime('%B')
+    @day = I18n.l(Date.today, format: '%A')
+    @date = I18n.l(Date.today, format: '%d')
+    @month = I18n.l(Date.today, format: '%B')
 
     @player_count = Player.count
   end

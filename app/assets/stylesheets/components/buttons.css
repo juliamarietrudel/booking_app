@@ -1,7 +1,10 @@
+.email-button {
+  margin: 10px;
+}
+
 .confirm-button {
   display: block;
   padding: 10px;
-  margin: 10px 0;
   background-color: #ffffff;
   color: black;
   border: 1px solid black;
@@ -14,10 +17,13 @@
   text-decoration: none;
 }
 
+input {
+  margin: 10px;
+}
+
 .comment-confirm-button {
   display: block;
   padding: 10px;
-  margin: 10px 0;
   background-color: white;
   color: black;
   border: 1px solid black;
@@ -87,11 +93,14 @@
 }
 
 /* Small screens: Stack buttons vertically */
-@media (max-width:1099px) {
+@media (max-width:700px) {
   .button-container {
-    /* flex-direction: column; */
-    /* width: 90%; */
-    /* align-items: center; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .btn-width {
+    width: 160px;
   }
 }
 
