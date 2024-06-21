@@ -37,11 +37,11 @@ input {
 }
 
 .comment-confirm-button:hover {
-  box-shadow: 0 10px 20px rgb(0 0 0 / 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .confirm-button:hover {
-  box-shadow: 0 10px 20px rgb(0 0 0 / 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .confirmed-button {
@@ -82,14 +82,14 @@ input {
   border-radius: 5px;
   margin: 10px 0;
   cursor: pointer;
-  text-shadow: 0 10px 20px rgb(0 0 0 / 0.7);
+  text-shadow: 0 10px 20px rgb(0, 0, 0, 0.7);
 }
 
 #close-page-button:hover i{
   /* background-color: #0b7000;
   color: white;
   border: #0b7000 solid 1px; */
-  box-shadow: 0 10px 20px rgb(0 0 0 / 0.3);
+  box-shadow: 0 10px 20px rgb(0, 0, 0, 0.3);
 }
 
 /* Small screens: Stack buttons vertically */
