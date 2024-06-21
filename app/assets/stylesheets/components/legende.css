@@ -1,0 +1,25 @@
+.legende-container {
+  display: flex;
+  justify-content: center;
+  /* margin: 10px; */
+}
+
+.text-aligned {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-aligned p {
+  font-size: 1rem;
+}
+
+
+.colors {
+  margin: 0 10px;
+}
+
+.left {
+  margin-right: 20px;
+}

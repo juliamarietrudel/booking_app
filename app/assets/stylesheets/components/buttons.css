@@ -1,0 +1,100 @@
+.confirm-button {
+  display: block;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.comment-confirm-button {
+  display: block;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.comment-confirm-button:hover {
+  box-shadow: 0 10px 20px rgb(0 0 0 / 0.3);
+}
+
+.confirm-button:hover {
+  box-shadow: 0 10px 20px rgb(0 0 0 / 0.3);
+}
+
+.confirmed-button {
+  background-color: #0b7000;
+  color: white;
+  border: none;
+}
+
+#disabled-button {
+  box-shadow: none;
+  cursor: auto;
+  color: rgb(160, 159, 159);
+  border: 1px solid rgb(160, 159, 159);
+}
+
+/* .button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+} */
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#close-page-button i{
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  padding: 0.7rem 1rem;
+  border-radius: 5px;
+  margin: 10px 0;
+  cursor: pointer;
+  text-shadow: 0 10px 20px rgb(0 0 0 / 0.7);
+}
+
+#close-page-button:hover i{
+  /* background-color: #0b7000;
+  color: white;
+  border: #0b7000 solid 1px; */
+  box-shadow: 0 10px 20px rgb(0 0 0 / 0.3);
+}
+
+/* Small screens: Stack buttons vertically */
+@media (max-width:1099px) {
+  .button-container {
+    /* flex-direction: column; */
+    /* width: 90%; */
+    /* align-items: center; */
+  }
+}
+
+/* Medium screens and large screens: Two buttons side by side */
+@media (min-width: 1100px) {
+}

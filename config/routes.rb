@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   get '/play', to: 'games#register_participation', as: 'register_game'
 
   post 'send_participation_invites', to: 'main#send_participation_invites'
+
+  post 'add_comment', to: 'players#add_comment', as: 'add_comment'
 end

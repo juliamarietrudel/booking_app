@@ -5,29 +5,25 @@
 
 <table class='table_participations'>
   <thead>
-    <th id='left'>Dates</th>
-    <th>Noms des joueurs</th>
-    <th id='right'>Équipes</th>
+    <th id='left'>Noms des joueurs</th>
+    <% @games.each do |game| %>
+      <th><%= game.date.strftime("%a") %></th>
+    <% end %>
+    <th id='right'>Commentaires</th>
   </thead>
   <tbody>
-    <% @games.each do |game| %>
+    <% @players.each do |player| %>
       <tr>
         <td>
-          <%= game.date.strftime("%a, %d %b %Y") %>
+          <%= player.first_name %> <%= player.last_name %>
         </td>
-        <td>
-          <ul>
-            <% game.participations.map do |p| %>
-              <li>
-                <%= p.player.first_name %>
-                <%= p.player.last_name %>
-              </li>
+        <% @games.each do |game| %>
+          <td>
+            <% if player.participations.exists?(game_id: game.id) %>
+              <p>x</p>
             <% end %>
-          </ul>
-        </td>
-        <td>
-
-        </td>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

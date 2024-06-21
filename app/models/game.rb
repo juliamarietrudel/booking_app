@@ -9,7 +9,7 @@ class Game < ApplicationRecord
   def self.dates_for_next_week
     # start_date = Date.today.next_week(:sunday)
     start_date = Date.today + (7 - Date.today.wday) % 7
-    (1..4).map { |i| start_date + i.days }
+    [1, 2, 4, 5].map { |i| start_date + i.days }
   end
 
   def self.create_games(dates)

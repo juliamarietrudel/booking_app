@@ -1,37 +1,58 @@
-<h1>Upcoming Games</h1>
-<div class="button-container-wrapper">
-  <div class="legende-container">
-    <div class="text-aligned left">
-      <div class="colors color-unconfirmed"></div>
-      <p>Unconfirmed</p>
-    </div>
-    <div class="text-aligned">
-      <div class="colors color-confirmed"></div>
-      <p>confirmed</p>
-    </div>
+<div class="main-container" id="main-container-games">
+  <div class="container-titles">
+    <h1>Clickez sur les dates pour lesquelles vous voulez jouer</h1>
+    <h2>Vous avez confimé que vous voulez jouer:
+      <p class="days-confirmed"><%= @player.participations.map { |p| p.game.date.strftime("%A") }.to_sentence(last_word_connector: ' and ', two_words_connector: ' and ') %></p>
+    </h2>
   </div>
-  <div class="button-container">
-    <% @games.each do |game| %>
-      <%= form_with(url: create_or_destroy_participation_path(token: @player.token, game_id: game.id), method: :post, local: true) do |form| %>
-        <%= submit_tag game.date.strftime("%A the %dth of %B"), class: "confirm-button",
-          data: { player_token: @player.token || 'No player found', game_id: game.id || 'No game found'} do %>
+  <div class="form-container">
+    <div class="button-container">
+      <% @games.each do |game| %>
+        <%= form_with(url: create_or_destroy_participation_path(token: @player.token, game_id: game.id), method: :post, local: true) do |form| %>
+          <%= submit_tag game.date.strftime("%A the %dth of %B"), class: "confirm-button",
+            data: { player_token: @player.token || 'No player found', game_id: game.id || 'No game found'} do %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
+    <div class="form-center">
+      <%= form_with(url: add_comment_path(token: @player.token), method: :post, local: true, html: { class: 'form-justify' }) do |form| %>
+        <%= form.text_field :comment, class: 'input-field' %>
+        <%= form.submit 'Continue', class: 'comment-confirm-button' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container-exit">
+    <h2>Cliquez sur le x en dessous quand vous avez terminé</h2>
+    <div id="close-page-button"><i class="fa-solid fa-xmark"></i></div>
   </div>
 </div>
 
 
-
-
 <script>
+  const commentConfirmButton = document.querySelector('.comment-confirm-button');
   const buttons = document.querySelectorAll('.confirm-button');
+  const closeButton = document.querySelector('#close-page-button');
+
+  //  disable comment confirm button
+  const disableCommentButton = () => {
+    commentConfirmButton.disabled = true;
+    commentConfirmButton.setAttribute('id', 'disabled-button')
+    commentConfirmButton.value = 'Commentaire Envoyé';
+  }
+
+  // if (localStorage.getItem('commentButtonClicked')) disableCommentButton();
+
+  commentConfirmButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    disableCommentButton();
+    // localStorage.setItem('commentButtonClicked', true);
+    event.target.form.submit();
+  })
 
   // load page with appropriate button colors
   document.addEventListener('DOMContentLoaded', (event) => {
-    // console.log('content loaded');
-    // select buttons
-
     buttons.forEach((button) => {
       playerToken = button.dataset.playerToken;
       gameId = button.dataset.gameId;
@@ -39,13 +60,10 @@
       .then(response => response.json())
       .then(data => {
         console.log(data.exists);
-        if (data.exists) {
-          button.style.backgroundColor = '#023e7f';
-        } else {
-          // button.style.backgroundColor = '#007bff';
-        }
+        if (data.exists) button.classList.add('confirmed-button');
       })
     })
+
   });
 
   // change button colors when click
@@ -60,7 +78,8 @@
       .then(data => {
         if (data.exists) {
           console.log(data.exists);
-          button.style.backgroundColor = '#023e7f';
+          // button.style.backgroundColor = '#023e7f';
+          button.classList.add('color-confirmed');
           button.form.submit(); // This manually submits the form
         } else {
           console.log(data.exists);
@@ -69,48 +88,11 @@
         }
       })
     })
-  })
-
-</script>
-
-
-
-
-
-
-
-<%# document.addEventListener('DOMContentLoaded', function() {
-  const buttons = document.querySelectorAll('.confirm-button');
-
-  buttons.forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent the form submission
-
-      const gameId = this.dataset.gameId;
-      const playerToken = this.dataset.player;
-      console.log('clicked')
-      fetch(`/games/${gameId}/participations?token=${playerToken}`, {
-        method: 'POST', // Assume every click toggles participation status
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ player_id: playerToken })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data.message); // Log the server response message
-        updateButtonColor(button, data.message);
-      })
-      .catch(error => console.error(error));
-    });
   });
 
-  function updateButtonColor(button, message) {
-    if (message.includes("added")) {
-      button.style.backgroundColor = 'blue';
-    } else {
-      button.style.backgroundColor = 'pink';
-    }
-  }
-}); %>
+  // close page
+  closeButton.addEventListener('click', function() {
+    window.close();
+    // console.log('trying to close')
+  })
+</script>
