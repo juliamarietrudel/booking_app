@@ -82,7 +82,7 @@ input {
   border-radius: 5px;
   margin: 10px 0;
   cursor: pointer;
-  text-shadow: 0 10px 20px rgb(0, 0, 0, 0.7);
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
 }
 
 #close-page-button:hover i{
