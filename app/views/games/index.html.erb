@@ -25,8 +25,9 @@
   </div>
 
   <div class="container-exit">
-    <h2>Cliquez sur le "x" ci-dessous quand vous avez terminé</h2>
-    <div id="close-page-button"><i class="fa-solid fa-xmark"></i></div>
+    <h2>Fermez cette page quand vous avez terminé</h2>
+    <%# <h2>Cliquez sur le "x" ci-dessous quand vous avez terminé</h2> %>
+    <%# <div id="close-page-button"><i class="fa-solid fa-xmark"></i></div> %>
   </div>
 </div>
 
@@ -99,8 +100,10 @@
   });
 
   // close page
-  closeButton.addEventListener('click', function() {
-    window.close();
-    // console.log('trying to close')
-  })
+  // closeButton.addEventListener('click', function(event) {
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  //   window.close();
+  //     alert('Thank you! You have completed your selections.');
+  // })
 </script>
