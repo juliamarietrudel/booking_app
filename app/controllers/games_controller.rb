@@ -5,6 +5,7 @@ class GamesController < ApplicationController
     if @player
       @dates = Game.dates_for_next_week
       @games = Game.create_games(@dates)
+      @latest_games = Game.latest_week_games.by_date
       Rails.logger.info "***********************#{@games}"
       # @games.map do |date|
       #   Game.find_or_create_date(date)
@@ -28,7 +29,7 @@ class GamesController < ApplicationController
       else
         @game.participations.create(player: @player)
       end
-      render json: { status: 'success', message: message }
+      render json: { status: 'success', message: }
     else
       render json: @game.participations
     end

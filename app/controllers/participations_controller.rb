@@ -25,10 +25,9 @@ class ParticipationsController < ApplicationController
     end
   end
 
-
   def index
     @participations = Participation.all
-    @games = Game.by_date
+    @games = Game.latest_week_games.by_date
     @players = Player.all
   end
 

@@ -11,6 +11,5 @@ class MainMailer < ApplicationMailer
     @url = url_for(controller: 'games', action: 'index', token: @player.token, only_path: false)
     Rails.logger.info "Generated URL for player #{@player.email}: #{@url}"
     mail(to: @player.email, subject: 'Réservation de parties de golf')
-    Rails.logger.info "Email sent to #{@player.email}"
   end
 end

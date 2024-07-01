@@ -13,7 +13,8 @@ class MainController < ApplicationController
 
     players.each do |player|
       Rails.logger.info "=== Inviting player: #{player.email} ==="
-      MainMailer.participation_invite(player).deliver_later
+      ParticipationInviteJob.perform_later(player)
+      # MainMailer.participation_invite(player).deliver_later
     end
 
     redirect_to root_path, notice: 'Participation invites sent to all players.'

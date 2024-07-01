@@ -9,7 +9,7 @@ class Game < ApplicationRecord
     Date.new(2024, 9, 9),
     Date.new(2024, 9, 16),
     Date.new(2024, 9, 23)
-  ]
+  ].freeze
 
   def participated?(player)
     participations.exists?(player_id: player.id)
@@ -36,4 +36,9 @@ class Game < ApplicationRecord
   # end
 
   scope :by_date, -> { order(:date) }
+
+  scope :latest_week_games, lambda {
+    latest_date = maximum(:date)
+    where(date: latest_date.beginning_of_week..latest_date.end_of_week)
+  }
 end
