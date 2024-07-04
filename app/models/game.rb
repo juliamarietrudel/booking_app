@@ -15,6 +15,13 @@ class Game < ApplicationRecord
     participations.exists?(player_id: player.id)
   end
 
+  def self.create_games_for_the_week
+    Rails.logger.info "Creating games for this week at #{Time.now}"
+    dates = self.dates_for_next_week
+    games = self.create_games(dates)
+    Rails.logger.info "Games created: #{games.map(&:date).join(', ')}"
+  end
+
   def self.dates_for_next_week
     # start_date = Date.today.next_week(:sunday)
     start_date = Date.today + (7 - Date.today.wday) % 7

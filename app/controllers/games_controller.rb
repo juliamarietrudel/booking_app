@@ -3,8 +3,8 @@ class GamesController < ApplicationController
 
   def index
     if @player
-      @dates = Game.dates_for_next_week
-      @games = Game.create_games(@dates)
+      # @dates = Game.dates_for_next_week
+      # @games = Game.create_games(@dates)
       @latest_games = Game.latest_week_games.by_date
       Rails.logger.info "***********************#{@games}"
       # @games.map do |date|
